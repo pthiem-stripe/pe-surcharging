@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import { useEffect } from "react";
 import { useState } from "react";
@@ -34,7 +33,7 @@ const options = {
 const surcharges = {
   au_becs_debit: 25,
   card: 150,
-}
+};
 
 export default function Home() {
   const [clientSecret, setClientSecret] = useState();
@@ -64,7 +63,9 @@ export default function Home() {
         <main className="flex flex-col items-center justify-center ">
           <div className="w-full items-center flex flex-col mb-20  ">
             <div className={showLoadingSpinnger ? "visible" : "hidden"}>
-              <img className="h-8 w-8 mx-auto" src="loading.gif" />
+            <div className="h-8 w-8 mx-auto">
+              <img  src="loading.gif" />
+              </div>
               <div className="mt-4">Getting things ready...</div>
             </div>
             <div className={showLoadingSpinnger ? "invisible" : "visible"}>
@@ -79,17 +80,17 @@ export default function Home() {
                       <div className="columns-2 text-center mt-2">
                         <div>
                           <div className="font-bold">Card</div>
-                          <div>SGD {surcharges['card']/100}</div>
+                          <div>SGD {surcharges["card"] / 100}</div>
                         </div>
                         <div>
                           <div className="font-bold">AU Direct Debit</div>
-                          <div>SGD {surcharges['au_becs_debit']/100}</div>
+                          <div>SGD {surcharges["au_becs_debit"] / 100}</div>
                         </div>
                       </div>
                     </div>
                     <Elements stripe={stripePromise} options={options}>
                       <CheckoutForm
-                      update
+                        update
                         elementReady={(isReady) =>
                           updateElementReadyState(isReady)
                         }
@@ -107,7 +108,7 @@ export default function Home() {
                           src="prince-of-persia.jpeg"
                           className="rounded-t"
                           alt="prince of persia"
-                        ></img> 
+                        ></img>
                         <img
                           src="working-in-public.jpeg"
                           className="rounded-t"
@@ -123,12 +124,26 @@ export default function Home() {
                         <div className="uppercase">SGD 27.00</div>
                       </div>
                       <div className="mt-1 mx-5 flex justify-between  text-lg ">
-                        <div>Surcharge ({paymentMethodType === 'card' ? "Card" : "AU Direct Debit"})</div>
-                        <div className="uppercase"> SGD {(surcharges[paymentMethodType]/100).toFixed(2)}</div>
+                        <div>
+                          Surcharge (
+                          {paymentMethodType === "card"
+                            ? "Card"
+                            : "AU Direct Debit"}
+                          )
+                        </div>
+                        <div className="uppercase">
+                          {" "}
+                          SGD {(surcharges[paymentMethodType] / 100).toFixed(2)}
+                        </div>
                       </div>
                       <div className="mt-1 mx-5 flex justify-between  text-lg ">
                         <div>Total </div>
-                        <div className="uppercase">SGD {(50 + surcharges[paymentMethodType]/100).toFixed(2)}</div>
+                        <div className="uppercase">
+                          SGD{" "}
+                          {(50 + surcharges[paymentMethodType] / 100).toFixed(
+                            2
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>

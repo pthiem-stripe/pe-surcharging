@@ -29,7 +29,7 @@ const CheckoutForm = (props) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: process.env.NEXT_PUBLIC_SUCCESS_URL
+        return_url: process.env.NEXT_PUBLIC_SUCCESS_URL,
       },
     });
 
@@ -49,7 +49,7 @@ const CheckoutForm = (props) => {
         method: "POST",
         body: JSON.stringify({
           amount: price,
-          currency: "AUD"
+          currency: "AUD",
         }),
       }
     );
@@ -59,11 +59,11 @@ const CheckoutForm = (props) => {
     return paymentIntenClientSecret;
   };
 
-
   return (
     <form onSubmit={submitForm} className="mb-12">
-      <div className="w-full ">
+      <div className="w-full">
         <PaymentElement
+          disabled={pageLoading}
           className="mb-3"
           onReady={() => {
             props.elementReady(true);
@@ -73,13 +73,18 @@ const CheckoutForm = (props) => {
           }}
         />
       </div>
-      {pageLoading ? (
-        <img className="h-6 w-6 mt-6 mx-auto" src="loading.gif" />
-      ) : (
-        <button disabled={!stripe} className="buttonPrimary w-full mt-6">
+      <div className={pageLoading ? "visible" : "hidden"}>
+        <div className="h-8 w-8 mx-auto mt-8">
+          <img src="loading.gif" />
+        </div>
+        
+      </div>
+      <div className={pageLoading ? "invisible" : "visible"}>
+        <button disabled={!stripe} className="buttonPrimary w-full mt-8">
           Submit
         </button>
-      )}
+      </div>
+
       {errorMessage ? (
         <div className="mt-6 text-red text-base text-center text-red-600">
           {errorMessage}
