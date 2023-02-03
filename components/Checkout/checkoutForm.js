@@ -11,6 +11,7 @@ const CheckoutForm = (props) => {
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
+  const [elementReady, setElementReady] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState();
 
   const submitForm = async (e) => {
@@ -66,6 +67,7 @@ const CheckoutForm = (props) => {
           disabled={pageLoading}
           className="mb-3"
           onReady={() => {
+            setElementReady(true);
             props.elementReady(true);
           }}
           onChange={(event) => {
@@ -73,17 +75,20 @@ const CheckoutForm = (props) => {
           }}
         />
       </div>
-      <div className={pageLoading ? "visible" : "hidden"}>
-        <div className="h-8 w-8 mx-auto mt-8">
-          <img src="loading.gif" />
-        </div>
-        
-      </div>
-      <div className={pageLoading ? "invisible" : "visible"}>
-        <button disabled={!stripe} className="buttonPrimary w-full mt-8">
-          Submit
-        </button>
-      </div>
+      {elementReady ? (
+        <>
+          <div className={pageLoading ? "visible" : "hidden"}>
+            <div className="h-8 w-8 mx-auto mt-8">
+              <img src="loading.gif" />
+            </div>
+          </div>
+          <div className={pageLoading ? "invisible" : "visible"}>
+            <button disabled={!stripe} className="buttonPrimary w-full mt-8">
+              Submit
+            </button>
+          </div>
+        </>
+      ) : null}
 
       {errorMessage ? (
         <div className="mt-6 text-red text-base text-center text-red-600">
