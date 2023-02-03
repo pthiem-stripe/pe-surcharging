@@ -1,0 +1,5 @@
+[functions]
+  directory = "functions"
+
+[build]
+environment = {STRIPE_SK = "sk_test_51LpVkVJiIWirm98iNM6UITTlbEDaG5TCViv5ptAR2RoRYEbA59g40d5OCQ4D1s4nOKOJwflxTRkhPhQOpVD0VIEt00iJ6FKJVV", NEXT_PUBLIC_STRIPE_PK = "pk_test_51LpVkVJiIWirm98iZKnlBepqPRViKIqppev72RFUeKwEnYIfQ77qNXu6o5feh6noKtle5uhNswAaRi1FINZOfgrq00Xw0MzMAi", NEXT_PUBLIC_SUCCESS_URL = "http://localhost:8888/success"}
